@@ -1,0 +1,19 @@
+extends layout
+
+block content
+	h1 jQueryとRequireによる地図テスト
+	div#map-canvas(style="width: 600px;height:300px;")
+
+	dev
+		p 緯度
+			span#lat
+		p 軽度
+			span#lng
+
+		script.
+			var require = {
+				urlArgs: 'bust=' + (new Date()).getTime(),
+				baseUrl: 'javascripts'
+			};
+		script(type="text/javascript", src="javascripts/require-jquery.js", data-main="index.js")
+
