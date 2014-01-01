@@ -1,19 +1,24 @@
 extends layout
 
 block content
-	h1=title 
-	div#map-canvas(style="width: 600px;height:300px;")
+	div(class="navbar navbar-inverse navbar-fixed-top" role="navigation")
+		div.container
+			div.navbar-header
+				a.navbar-brand(href="#")=title
+	div.container
+		div.row
+			div.col-md-8
+				div#map-canvas(style="width: 750px;height:300px;")
+			div.col-md-4
+				dev
+					p 緯度
+						span#lat
+					p 軽度
+						span#lng
 
-	dev
-		p 緯度
-			span#lat
-		p 軽度
-			span#lng
+	div.footer
+		div.container
+			p copyright PSS@2013
 
-		script.
-			var require = {
-				urlArgs: 'bust=' + (new Date()).getTime(),
-				baseUrl: 'javascripts'
-			};
-		script(type="text/javascript", src="javascripts/index.js")
+	script(type="text/javascript", src="javascripts/index.js")
 
