@@ -1,5 +1,3 @@
-define(["jquery"],
-	function(jquery){
 		/**
 		* Callback function: update #lat and #lng element value
 		*/
@@ -47,5 +45,4 @@ define(["jquery"],
 		}
 
 		load_gmap_async();
-	});
 
