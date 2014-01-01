@@ -3,7 +3,6 @@
 		*/
 		function updateLatLng(map){
 			latlng = map.getCenter();
-			console.log(latlng);
 			$('#lat').text(latlng.lat());
 			$('#lng').text(latlng.lng());
 		}
@@ -18,12 +17,51 @@
 				mapTypeId: google.maps.MapTypeId.ROADMAP,
 			};
 
+			var marker;
 			var map = new google.maps.Map($('#map-canvas')[0], mapOptions);
 
-			//add event listener
+			//add event listener 地図の中心が変わった時
 			google.maps.event.addListener(map, 'center_changed', function() {
 				updateLatLng(map);
 			});
+			//add event listener クリックしたとき
+			google.maps.event.addListener(map, 'click', function(event) {
+				if(marker){marker.setMap(null)};
+				marker = new google.maps.Marker({
+					position: event.latLng,
+					draggable: true,
+					map: map
+				});
+				infotable(marker.getPosition().lat(), marker.getPosition().lng(), map.getZoom());
+				geocode();
+				google.maps.event.addListener(marker, 'dragend', function(event) {
+					infotable(maker.getPosition().lat(), marker.getPosition().lng(), map.getZoom());
+					geocode();
+				});
+				google.maps.event.addListener(map, 'zoom_changed', function(event) {
+					infotable(marker.getPosition().lat(), marker.getPosition().lng(), map.getZoom());
+				});
+			});
+			//ジオコーディング
+			function geocode(){
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode(
+					{'location': marker.getPosition()},
+					function(results, status) {
+						if(status == google.maps.GeocoderStatus.OK && results[0]){
+							$("#id_address").text(results[0].formatted_address);
+						}else{
+							$("#id_address").text("GeoCode取得に失敗しました");
+						}
+					}
+				);
+			};
+
+			function infotable(ido, keido, label){
+				$('#id_ido').text(ido);
+				$('#id_keido').text(keido);
+				$('#id_label').text(label);
+			};
 
 			updateLatLng(map);
 		}
