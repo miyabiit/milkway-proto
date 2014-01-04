@@ -1,0 +1,5 @@
+db.deliveries.insert({lat:10.10, lng:20.10});
+db.deliveries.insert({lat:10.20, lng:20.20});
+db.deliveries.insert({lat:10.30, lng:20.30});
+db.deliveries.insert({lat:10.40, lng:20.40});
+db.deliveries.insert({lat:10.50, lng:20.50});

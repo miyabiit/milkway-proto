@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+	div(class="navbar navbar-inverse navbar-fixed-top" role="navigation")
+		div.container
+			div.navbar-header
+				a.navbar-brand(href="#")=title
+	div.container
+		table.table
+			tr
+				th ID
+				th 緯度
+				th 軽度
+				th 住所
+			- for (var i=0; i < deliveries.length; i++ )
+					tr
+						td= deliveries[i]._id
+						td= deliveries[i].lat
+						td= deliveries[i].lng
+						td= deliveries[i].address
